@@ -8,16 +8,42 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="timer" id="timer">
-        <span id="time">0</span>
-    </div>
+    <!-- <div class="timer" id="timer" > </div> -->
+        <form action="">
+            <select id="timer">
+                <option value="30">
+                    30 Seconds
+                </option>
+                <option value="60">
+                    60 Seconds
+                </option>
+                <option value="90">
+                    90 Seconds
+                </option>
+                <option value="120">
+                    120 Seconds
+                </option>
+            </select>
+            <button type="submit" onclick="startRound()" >Start</button>
+        </form>
     <div class="container">
         <div class="quote-display" id="quoteDisplay">
-            Quote
         </div>
         <textarea class="quote-input" id="quoteInput" autofocus>
-            QUOTE
         </textarea>
     </div>
 </body>
 </html>
+<!-- 
+
+    1. Saniye ayarlama. Saniye bitene kadar işleme (quoteInputElement.addEventListener - bunu bir fonksiyona atayacaksın) devam edilebilecek.
+    2. Saniye bitince input alanı kapanacak.
+    3. Saniye bitince sonuçlar ekrana gelecek.
+    4. Saniye bitince tekrar başlatma butonu eklenecek.
+    5. Saniye bitince tekrar başlatma butonuna basılınca tekrar başlayacak.
+    6. Saniye bitince tekrar başlatma butonuna basılınca sonuçlar silinecek.
+    7. Saniye bitince tekrar başlatma butonuna basılınca input alanı temizlenecek.
+    8. Saniye bitince tekrar başlatma butonuna basılınca quoteInputElement.addEventListener kısmı
+    tekrar çalışacak.
+
+ -->
