@@ -1,38 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speed Typing Game</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-</head>
-<body>
-    <!-- <div class="timer" id="timer" > </div> -->
-        <form action="">
-            <select id="timer">
-                <option value="30">
-                    30 Seconds
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Speed Typing Game</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+    </head>
+
+    <body>
+        <form>
+            <label for="timeSelection">
+                Select Time Limit
+            </label>
+            <select id="timeSelection">
+                <option value=5>
+                    5 Seconds
                 </option>
-                <option value="60">
+                <option value=60>
                     60 Seconds
                 </option>
-                <option value="90">
+                <option value=90>
                     90 Seconds
                 </option>
-                <option value="120">
+                <option value=120>
                     120 Seconds
                 </option>
+                <option value=180>
+                    180 Seconds
+                </option>
             </select>
-            <button type="submit" onclick="startRound()" >Start</button>
+            <button type="button" id="submitTimeSelection">Start</button>
         </form>
-    <div class="container">
-        <div class="quote-display" id="quoteDisplay">
+
+        <div class="timer" id="timer">
+
         </div>
-        <textarea class="quote-input" id="quoteInput" autofocus>
+
+        <div class="container">
+            <div class="quote-display" id="quoteDisplay">
+            </div>
+            <textarea class="quote-input" id="quoteInput" autofocus>
         </textarea>
-    </div>
-</body>
+        </div>
+
+        <div class="container" style="margin-bottom: 25px;">
+            <h3>Quote Counter:
+                <span id="quoteCounterElement">
+
+                    </sp>
+            </h3>
+            <h3>Correct Character Counter:
+                <span id="correctCharacterCounterElement">
+
+                </span>
+            </h3>
+            <h3>Incorrect Character Counter:
+                <span id="incorrectCharacterCounterElement">
+
+                </span>
+            </h3>
+        </div>
+    </body>
+
 </html>
 <!-- 
 
