@@ -1,72 +1,91 @@
+/* 
+
+E: Element 
+CC: CharacterCounter
+
+- CPS'nin (totalCorrectCharacter / totalTime) olması lazım.
+- Correct character counter her zaman totali göstermeli.
+*/
+
 // How to get quotes: api.quotable.io/random
 const RANDOM_QUOTE_API_URL = 'https://api.quotable.io/random';
-const quoteDisplayElement = document.getElementById('quoteDisplay');
-const quoteInputElement = document.getElementById('quoteInput');
+const quoteDisplayE = document.getElementById('quoteDisplay');
+const quoteInputE = document.getElementById('quoteInput');
 
-const timerElement = document.getElementById('timer');
-const timeSelectionElement = document.getElementById('timeSelection');
+
+const timerE = document.getElementById('timer');
+const timeSelectionE = document.getElementById('timeSelection');
 const submitTimeSelectionButton = document.getElementById('submitTimeSelection');
-const quoteCounterElement = document.getElementById('quoteCounterElement');
-const correctCharacterCounterElement = document.getElementById('correctCharacterCounterElement');
-const incorrectCharacterCounterElement = document.getElementById('incorrectCharacterCounterElement');
+const quoteCounterE = document.getElementById('quoteCounterElement');
+const correctCCE = document.getElementById('correctCharacterCounterElement');
+const incorrectCCE = document.getElementById('incorrectCharacterCounterElement');
+const characterPerSecondE = document.getElementById('characterPerSecondElement');
 
-let newQuoteCounter;
-let correctCharacterCounter;
-let incorrectCharacterCounter;
-
-
-correct = true;
-function startRound() {
-    quoteInputElement.addEventListener('input', () => {
-        const arrayQuote = quoteDisplayElement.querySelectorAll('span')
-        const arrayValue = quoteInputElement.value.split('');
-        arrayQuote.forEach((characterSpan, index) => {
-            const character = arrayValue[index];
-            if (character == null) {
-                characterSpan.classList.remove('correct');
-                characterSpan.classList.remove('incorrect');
-                correct = false;
-            }
-            else if (character === characterSpan.innerText) {
-                characterSpan.classList.add('correct');
-                characterSpan.classList.remove('incorrect');
-                correctCharacterCounter += 1;
-            } else {
-                characterSpan.classList.remove('correct');
-                characterSpan.classList.add('incorrect');
-                incorrectCharacterCounter += 1;
-                correct = false;
-            }
-
-
-        })
-
-        if (correct) {
-            newQuoteCounter = 0;
-            renderNewQuote();
-            newQuoteCounter += 1;
-        }
-    });
-    renderNewQuote()
-}
+let debounceTimer;
+let correctCC = 0;
+let incorrectCC = 0;
+let characterPerSecond = 0;
 
 submitTimeSelectionButton.addEventListener('click', () => {
-    let selectedTime = timeSelectionElement.value;
-    timerElement.innerText = selectedTime;
+    const selectedTimeStart = timeSelectionE.value;
+    let selectedTime = timeSelectionE.value;
+    timerE.innerText = selectedTime;
+    quoteInputE.disabled = false;
+
 
     intervalId = setInterval(() => {
-        timerElement.innerText = selectedTime--;
+        timerE.innerText = selectedTime--;
+        correctCCE.innerText = correctCC;
+        incorrectCCE.innerText = incorrectCC;
+        characterPerSecond = (correctCC / selectedTimeStart);
+        characterPerSecondE.innerText = characterPerSecond;
         if (selectedTime == 0) {
             clearInterval(intervalId);
-            quoteInputElement.disabled = true;
-            timerElement.innerText = "Time is up!";
-            quoteCounterElement.innerText = newQuoteCounter;
-            correctCharacterCounterElement.innerText = correctCharacterCounter;
-            incorrectCharacterCounterElement.innerText = incorrectCharacterCounter;
+            quoteInputE.disabled = true;
+            timerE.innerText = "Time is up!";
         }
     }, 1000);
     startRound();
 });
+
+
+function startRound() {
+    quoteInputE.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            const arrayQuote = quoteDisplayE.querySelectorAll('span');
+            const arrayValue = quoteInputE.value.split('');
+            dewam = true;
+            correctCC = 0; // Reset counters on each input
+            incorrectCC = 0;
+            tps = 0;
+
+            arrayQuote.forEach((characterSpan, index) => {
+                const character = arrayValue[index];
+
+                if (character == null) {
+                    characterSpan.classList.remove('correct');
+                    characterSpan.classList.remove('incorrect');
+                    dewam = false;
+                } else if (character === characterSpan.innerText) {
+                    correctCC += 1;
+                    characterSpan.classList.add('correct');
+                    characterSpan.classList.remove('incorrect');
+                } else {
+                    characterSpan.classList.remove('correct');
+                    characterSpan.classList.add('incorrect');
+                    incorrectCC += 1;
+                    dewam = false;
+                }
+            });
+            if (dewam) renderNewQuote();
+        }, 1); // Adjust the debounce time as needed
+    });
+
+    renderNewQuote();
+}
+
+
 
 function getRandomQuote() {
     let content = fetch(RANDOM_QUOTE_API_URL)
@@ -79,13 +98,13 @@ function getRandomQuote() {
 
 async function renderNewQuote() {
     const quote = await getRandomQuote();
-    quoteDisplayElement.innerHTML = '';
+    quoteDisplayE.innerHTML = '';
     quote.split('').forEach(character => {
         const characterSpan = document.createElement('span');
         characterSpan.innerText = character;
-        quoteDisplayElement.appendChild(characterSpan);
+        quoteDisplayE.appendChild(characterSpan);
     })
-    quoteInputElement.value = null;
+    quoteInputE.value = null;
 }
 
 
@@ -97,3 +116,45 @@ async function renderNewQuote() {
 
 
 
+/* 
+
+OLD:
+let newQuoteCounter = 0;
+let correctCharacterCounter = 0;
+let incorrectCharacterCounter = 0;
+
+
+correct = true;
+function startRound() {
+    quoteInputElement.addEventListener('input', () => {
+        const arrayQuote = quoteDisplayElement.querySelectorAll('span')
+        const arrayValue = quoteInputElement.value.split('');
+        arrayQuote.forEach((characterSpan, index) => {
+            const character = arrayValue[index];
+
+            if (character == null) {
+                characterSpan.classList.remove('correct');
+                characterSpan.classList.remove('incorrect');
+                correct = false;
+            }
+            else if (character === characterSpan.innerText) {
+                correctCharacterCounter += 1;
+                characterSpan.classList.add('correct');
+                characterSpan.classList.remove('incorrect');
+
+            } else {
+                characterSpan.classList.remove('correct');
+                characterSpan.classList.add('incorrect');
+                incorrectCharacterCounter += 1;
+                correct = false;
+            }
+        });
+
+        if (correct) renderNewQuote();
+    });
+
+    renderNewQuote();
+
+}
+
+*/
