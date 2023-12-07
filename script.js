@@ -20,6 +20,12 @@ const quoteCounterE = document.getElementById('quoteCounterElement');
 const correctCCE = document.getElementById('correctCharacterCounterElement');
 const incorrectCCE = document.getElementById('incorrectCharacterCounterElement');
 const characterPerSecondE = document.getElementById('characterPerSecondElement');
+const lastRoundSpeedElement = document.getElementById('lastRoundSpeedElement');
+
+const lastRoundSpeed = document.getElementById('lastRoundSpeed');
+
+lastRoundSpeedElement.classList.add('d-none');
+
 
 let debounceTimer;
 let correctCC = 0;
@@ -32,14 +38,14 @@ submitTimeSelectionButton.addEventListener('click', () => {
     timerE.innerText = selectedTime;
     quoteInputE.disabled = false;
 
-
     intervalId = setInterval(() => {
         timerE.innerText = selectedTime--;
         correctCCE.innerText = correctCC;
         incorrectCCE.innerText = incorrectCC;
-        characterPerSecond = (correctCC / selectedTimeStart);
-        characterPerSecondE.innerText = characterPerSecond;
+        characterPerSecond = (correctCC / (selectedTimeStart - selectedTime)); // Adjusted formula
+        characterPerSecondE.innerText = characterPerSecond.toFixed(2); // Format to two decimal places
         if (selectedTime == 0) {
+            lastRoundSpeedElement.classList.remove('d-none');
             clearInterval(intervalId);
             quoteInputE.disabled = true;
             timerE.innerText = "Time is up!";

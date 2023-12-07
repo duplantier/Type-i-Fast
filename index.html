@@ -36,7 +36,7 @@
                         </option>
                     </select>
                     <button class="btn btn-success form-control" type="button" id="submitTimeSelection">
-                        Start Counter
+                        Take a round!
                     </button>
                 </form>
             </div>
@@ -56,17 +56,24 @@
 
         <div class="container"
             style="margin-bottom: 25px; display:flex; justify-content:center; align-items:center; flex-direction:column;">
-            <h3>
+            <h3> Current Speed:
                 <span style="color:#016501;" id="characterPerSecondElement">
+                    -
+                </span> Character Per Second
+            </h3>
+
+            <h3 id="lastRoundSpeedElement"> Speed of the last round:
+                <span style="color:#016501;" id="lastRoundSpeed">
 
                 </span> Character Per Second
             </h3>
-            <h3>Correct Character Counter:
+
+            <h3>Correct Characters:
                 <span style="color:#016501;" id="correctCharacterCounterElement">
 
                 </span>
             </h3>
-            <h3>Incorrect Character Counter:
+            <h3>Incorrect Characters:
                 <span style="color:#c70303;" id="incorrectCharacterCounterElement">
 
                 </span>
