@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import RestartButton from "./components/RestartButton";
 import Results from "./components/Results";
+import UserTypings from "./components/UserTypings";
 
 const words = faker.random.words(10);
 
@@ -8,7 +9,11 @@ function App() {
   return (
     <>
       <CountdownTimer timeLeft={30} />
-      <GeneratedWords words={words} />
+      <WordsContainer>
+        <GeneratedWords words={words} />
+        <UserTypings className="absolute inset-0" userInput={"words"} />{" "}
+        {/* * User Input generated words'ün üzerine geliyor. İkisi de aynı style'a sahip: */}
+      </WordsContainer>
       <RestartButton
         className={"mx-auto mt-10 text-slate-500"}
         onRestart={() => null}
@@ -23,8 +28,16 @@ function App() {
   );
 }
 
+const WordsContainer = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="relative mx-w-xl mt-3 text-3xl leading-relaxed break-all">
+      {children}
+    </div>
+  );
+};
+
 const GeneratedWords = ({ words }: { words: string }) => {
-  return <div className="text-4xl text-slate-500">{words}</div>;
+  return <div className=" text-slate-500">{words}</div>;
 };
 
 const CountdownTimer = ({ timeLeft }: { timeLeft: number }) => {
