@@ -14,6 +14,7 @@ const useEngine = () => {
   const { words, updateWords } = useWords(NUMBER_OF_WORDS);
 
   const { timeLeft, startCountdown } = useCountdownTimer(COUNTDOWN_SECONDS);
+  const { resetCountDown } = useCountdownTimer(COUNTDOWN_SECONDS);
 
   const { typed, cursor, clearTyped, resetTotalTyped, totalTyped } = useTyping(
     state !== "finish"
@@ -22,6 +23,8 @@ const useEngine = () => {
   const [errors, setErrors] = useState(0);
 
   const isStarting = state === "start" && cursor > 0;
+
+  const areWordsFinished = cursor === words.length;
 
   const sumErrors = useCallback(() => {
     const wordsReached = words.substring(0, cursor);
@@ -36,7 +39,47 @@ const useEngine = () => {
     }
   }, [isStarting, startCountdown, cursor]);
 
-  return { state, words, timeLeft, typed, cursor, totalTyped };
+  // ! when the timer is over, we finish the game:
+  useEffect(() => {
+    if (!timeLeft) {
+      console.log("Game over!");
+      setState("finish");
+      sumErrors();
+    }
+  }, [timeLeft, sumErrors]);
+
+  /*
+   * When the current words are all filled up,
+   * We generate and show another set of words!
+   */
+
+  useEffect(() => {
+    if (areWordsFinished) {
+      console.log("Words finished!");
+      sumErrors();
+      updateWords();
+      clearTyped();
+    }
+  }, [
+    cursor,
+    words,
+    clearTyped,
+    typed,
+    areWordsFinished,
+    updateWords,
+    sumErrors,
+  ]);
+
+  const restart = useCallback(() => {
+    console.log("Restarting...");
+    resetCountDown();
+    resetTotalTyped();
+    setState("start");
+    setErrors(0);
+    updateWords();
+    clearTyped();
+  }, [clearTyped, updateWords, resetCountDown, resetTotalTyped]);
+  return { state, words, timeLeft, typed, totalTyped, errors, restart };
 };
 
 export default useEngine;
