@@ -7,13 +7,13 @@ import useEngine from "./hooks/useEngine";
 const words = faker.random.words(10);
 
 const App = () => {
-  const { state, words, timeLeft } = useEngine();
+  const { state, words, timeLeft, typed } = useEngine();
   return (
     <>
       <CountdownTimer timeLeft={timeLeft} />
       <WordsContainer>
         <GeneratedWords words={words} />
-        <UserTypings className="absolute inset-0" userInput={"words"} />{" "}
+        <UserTypings className="absolute inset-0" userInput={typed} />{" "}
         {/* * User Input generated words'ün üzerine geliyor. İkisi de aynı style'a sahip: */}
       </WordsContainer>
       <RestartButton
