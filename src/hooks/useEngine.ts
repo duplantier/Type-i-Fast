@@ -7,7 +7,7 @@ import useWords from "./useWords";
 export type State = "start" | "run" | "finish";
 
 const NUMBER_OF_WORDS = 30;
-const COUNTDOWN_SECONDS = 60;
+export const COUNTDOWN_SECONDS = 60;
 const { debug } = console;
 
 const useEngine = () => {

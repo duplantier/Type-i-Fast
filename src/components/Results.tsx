@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { formatPercentage } from "../utils/helpers";
 import { State } from "../hooks/useEngine";
+import { COUNTDOWN_SECONDS } from "../hooks/useEngine";
+
 const Results = ({
   state,
   errors,
@@ -57,6 +59,14 @@ const Results = ({
         transition={{ ...duration, delay: 1.4 }}
       >
         Typed: {total}
+      </motion.li>
+
+      <motion.li
+        initial={initial}
+        animate={animate}
+        transition={{ ...duration, delay: 1.9 }}
+      >
+        {(total / COUNTDOWN_SECONDS).toFixed(2)} Characters Per Second
       </motion.li>
     </motion.ul>
   );
