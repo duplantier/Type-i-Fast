@@ -2,7 +2,18 @@
 
 Type-i Fast is a fun and engaging typing speed test game built with React. Challenge yourself and improve your typing skills by racing against the clock. 🕒
 
-Test your typing speed and accuracy! ⌨️
+Test your typing speed and accuracy per minute! ⌨️
+
+## 🛠️ Tech Stack
+
+- React
+- TypeScript
+- TailwindCSS
+- Framer Motion
+- Fakerjs
+- ClassNames
+- React.js
+- Tailwind CSS
 
 ## 🏁 Getting Started
 
