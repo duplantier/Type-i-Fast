@@ -7,7 +7,6 @@ Test your typing speed and accuracy per minute! ⌨️
 ## 🛠️ Tech Stack
 
 - React.js
-- React.js
 - TypeScript
 - TailwindCSS
 - Framer Motion
