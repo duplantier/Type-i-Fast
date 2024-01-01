@@ -4,7 +4,7 @@ const RestartButton = ({
   onRestart: handleRestart,
   className = "",
 }: {
-  // REMEMBER:
+  // REMEMBER: ? means optional
   onRestart: () => void;
   className?: string;
 }) => {
@@ -19,7 +19,7 @@ const RestartButton = ({
     <button
       ref={buttonRef}
       onClick={handleClick}
-      className={`block rounded px-8 py-2 hover:bg-slate-300 ${className}`}
+      className={`block rounded px-8 py-2 hover:bg-slate-900 ${className} hover:border-yellow-300 text-slate-300 hover:text-yellow-300`}
     >
       <MdRefresh className="w-6 h-6" />
     </button>

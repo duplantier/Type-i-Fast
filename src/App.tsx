@@ -30,7 +30,7 @@ const App = () => {
 
       {/* Restart button */}
       <RestartButton
-        className={"mx-auto mt-10 text-slate-500"}
+        className={"mx-auto mt-10 text-slate-500 border-2 border-slate-700"}
         onRestart={restart}
       />
 

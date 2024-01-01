@@ -6,13 +6,12 @@ Test your typing speed and accuracy per minute! ⌨️
 
 ## 🛠️ Tech Stack
 
-- React
+- React.js
 - TypeScript
 - TailwindCSS
 - Framer Motion
 - Fakerjs
 - ClassNames
-- React.js
 - Tailwind CSS
 
 ## 🏁 Getting Started
