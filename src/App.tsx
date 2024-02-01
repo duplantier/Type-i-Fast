@@ -11,6 +11,9 @@ const App = () => {
     useEngine();
   return (
     <>
+      <h1 className="text-center bg-gradient-to-tr from-[#FFB800] to-[#FFF500] text-transparent bg-clip-text text-[4rem] mb-4 font-mono">
+        Type-i Fast
+      </h1>
       {/* Display a countdown timer */}
       <CountdownTimer timeLeft={timeLeft} />
 
@@ -62,6 +65,8 @@ const GeneratedWords = ({ words }: { words: string }) => {
 
 //* Component for displaying countdown timer
 const CountdownTimer = ({ timeLeft }: { timeLeft: number }) => {
-  return <h2 className="text-primary-400 font-medium">Time: {timeLeft} </h2>;
+  return (
+    <h2 className="text-primary-400 font-medium">Time Left: {timeLeft} </h2>
+  );
 };
 export default App;
